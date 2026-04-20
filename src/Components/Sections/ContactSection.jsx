@@ -32,12 +32,12 @@ const ContactSection = () => {
     setLoading(true);
     try {
       // During local development the backend Express server listens on port 3000
-      // (run with `npm run start-server`). In production (Netlify) the function
-      // path is `/.netlify/functions/contact`. Use the local API when running
-      // on localhost to avoid 404s.
+      // (run with `npm run start-server`). In production (Vercel), the serverless
+      // function will be available at `/api/contact`. Use localhost fallback when
+      // testing locally.
       const endpoint = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
         ? 'http://localhost:3000/api/contact'
-        : '/.netlify/functions/contact';
+        : '/api/contact';
 
       const res = await fetch(endpoint, {
         method: 'POST',
