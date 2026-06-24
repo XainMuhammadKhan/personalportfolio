@@ -27,11 +27,11 @@ const SectionIndicator = () => {
   }, []);
 
   return (
-    <div className="fixed left-4 lg:left-12 top-1/2 -translate-y-1/2 z-40 flex flex-col items-center gap-4">
-      <div className="text-white text-4xl font-black leading-none">{String(active + 1).padStart(2, '0')}</div>
-      <div className="flex flex-col gap-3 mt-2">
+    <div className="fixed left-3 lg:left-10 top-1/2 -translate-y-1/2 z-40 flex flex-col items-center gap-4 rounded-full border border-white/10 bg-black/40 px-3 py-4 backdrop-blur-xl">
+      <div className="text-cyan-200 text-3xl font-black leading-none">{String(active + 1).padStart(2, '0')}</div>
+      <div className="flex flex-col gap-3 mt-2 items-center">
         {sections.map((s, i) => (
-          <div key={s} className={`w-2 h-2 rounded-full transition-all duration-300 ${i === active ? 'bg-white scale-125' : 'bg-white/30'}`}></div>
+          <div key={s} className={`transition-all duration-300 ${i === active ? 'w-3 h-3 rounded-full bg-cyan-300 shadow-[0_0_14px_rgba(34,211,238,0.7)] scale-125' : 'w-2 h-2 rounded-full bg-white/25'}`}></div>
         ))}
       </div>
     </div>

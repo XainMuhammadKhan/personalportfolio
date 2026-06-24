@@ -84,8 +84,11 @@ const SkillsSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-6">
           <div className="col-span-1 lg:col-span-6">
             <div className="relative">
-              <h2 className="text-4xl md:text-5xl font-black uppercase tracking-widest text-white mb-2">Skills & Tools</h2>
-              <div className="h-1 w-24 bg-theme-accent-gray"></div>
+              <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-[11px] uppercase tracking-[0.35em] text-cyan-100/80 mb-4 backdrop-blur-xl">
+                Capability Stack
+              </div>
+              <h2 className="text-4xl md:text-5xl font-black uppercase tracking-[0.28em] text-white mb-2 futuristic-title">Skills & Tools</h2>
+              <div className="h-px w-28 bg-gradient-to-r from-cyan-300 to-transparent"></div>
             </div>
             <p className="text-theme-accent-gray mt-4">Technologies and tools I use frequently — comfortable working across front-end, tooling and build systems.</p>
           </div>
@@ -97,7 +100,7 @@ const SkillsSection = () => {
             return (
               <div
                 key={s.name}
-                className="flex flex-col items-center gap-2 p-3 bg-zinc-900/40 rounded-lg border border-white/5 hover:scale-105 transition-transform duration-200 white-glow hover:white-glow-strong"
+                className="flex flex-col items-center gap-2 p-4 cyber-panel rounded-2xl hover:scale-105 transition-transform duration-200 hover:border-cyan-300/25 hover:shadow-[0_0_40px_rgba(34,211,238,0.08)]"
               >
                 {Icon ? (
                   typeof Icon === 'string' ? (

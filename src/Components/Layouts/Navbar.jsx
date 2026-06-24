@@ -78,35 +78,28 @@ const Navbar = () => {
             <a 
                 href={href} 
                 onClick={isMobile ? closeMenu : null} // Use closeMenu for mobile links
-                className={`
-                    relative 
-                    transition-all 
-                    duration-300 
-                    transform 
-                    hover:scale-[1.05] 
-                    ${isMobile ? 'py-2 px-4 text-2xl' : 'py-1'}
-                `}
+                className={`relative transition-all duration-300 transform hover:scale-[1.05] hover:text-cyan-200 ${isMobile ? 'py-2 px-4 text-2xl' : 'py-1'}`}
             >
                 {name}
                 {/* Underline Element */}
-                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-white transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100 group-focus:scale-x-100"></span>
+                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-cyan-300 to-white transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100 group-focus:scale-x-100"></span>
             </a>
         </li>
     );
 
     return (
-        <nav className="absolute top-0 left-0 right-0 py-4 px-4 sm:py-8 sm:px-12 flex justify-between items-center z-50 uppercase tracking-wider text-sm font-semibold text-white">
+        <nav className="absolute top-0 left-0 right-0 py-4 px-4 sm:py-8 sm:px-12 flex justify-between items-center z-50 uppercase tracking-[0.28em] text-xs sm:text-sm font-semibold text-white">
             
             {/* Logo Placeholder */}
-            <div className="flex items-center gap-2">
-                <div className="w-6 h-6 border border-white rotate-45 flex items-center justify-center white-glow p-1 rounded-sm">
-                    <div className="w-3 h-3 bg-white"></div>
+            <div className="flex items-center gap-3 rounded-full border border-cyan-300/20 bg-white/8 px-3 py-2 backdrop-blur-2xl shadow-[0_12px_40px_rgba(0,0,0,0.35)] neon-outline">
+                <div className="w-7 h-7 border border-cyan-300/60 rotate-45 flex items-center justify-center rounded-sm bg-cyan-300/10 shadow-[0_0_25px_rgba(34,211,238,0.24)]">
+                    <div className="w-3 h-3 bg-cyan-200"></div>
                 </div>
-                <span className="hidden sm:inline">Xain's Portfolio</span>
+                <span className="hidden sm:inline text-white/90">Xain's Portfolio</span>
             </div>
 
             {/* Navigation Links (desktop) */}
-            <ul className="hidden sm:flex gap-6 text-xs">
+            <ul className="hidden sm:flex gap-6 text-xs rounded-full border border-cyan-300/15 bg-white/5 px-5 py-3 backdrop-blur-2xl shadow-[0_12px_40px_rgba(0,0,0,0.28)]">
                 {navLinks.map((link) => (
                     <NavLink key={link.name} {...link} />
                 ))}
@@ -119,7 +112,7 @@ const Navbar = () => {
                     onClick={toggleMenu}
                     aria-expanded={isMenuOpen}
                     aria-label="Toggle menu"
-                    className="relative z-60 text-white text-3xl transition-transform duration-300 hover:scale-110 hover:text-theme-accent-gray focus:outline-none"
+                    className="relative z-60 text-white text-3xl transition-transform duration-300 hover:scale-110 hover:text-cyan-200 focus:outline-none"
                 >
                     <div className={`transform transition-transform duration-300 ${isMenuOpen ? 'rotate-90 scale-95' : 'rotate-0'}`}>
                         {isMenuOpen ? <HiX /> : <HiMenu />}
@@ -132,7 +125,7 @@ const Navbar = () => {
                 <div
                     aria-hidden={!isOverlayMounted}
                     // Ensure transition classes are correctly defined for slide-in/slide-out
-                    className={`fixed inset-0 bg-theme-black/95 z-40 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`}
+                    className={`fixed inset-0 bg-[radial-gradient(circle_at_top,_rgba(34,211,238,0.14),_transparent_30%),rgba(0,0,0,0.88)] backdrop-blur-2xl z-40 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`}
                 >
                     {/* Close button inside overlay (top-right) */}
                     <button
@@ -140,7 +133,7 @@ const Navbar = () => {
                         onClick={closeMenu}
                         aria-label="Close menu"
                         tabIndex={isMenuOpen ? 0 : -1}
-                        className="absolute top-5 right-5 text-white text-3xl z-50 p-2 transition-transform duration-200 hover:scale-110 focus:outline-none"
+                        className="absolute top-5 right-5 text-white text-3xl z-50 p-2 transition-transform duration-200 hover:scale-110 hover:text-cyan-200 focus:outline-none"
                     >
                         <HiX />
                     </button>

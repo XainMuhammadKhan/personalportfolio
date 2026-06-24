@@ -42,7 +42,8 @@ const AboutSection = () => {
     <section id="about" ref={ref} className="min-h-screen flex items-center bg-theme-black text-white py-20 relative overflow-hidden">
 
       {/* Background decorative glow (subtle, theme-colored) */}
-      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-white/5 rounded-full blur-[120px] pointer-events-none -translate-x-1/2 -translate-y-1/2"></div>
+      <div className="absolute top-0 left-0 w-[500px] h-[500px] bg-cyan-400/10 rounded-full blur-[120px] pointer-events-none -translate-x-1/2 -translate-y-1/2"></div>
+      <div className="absolute top-24 right-0 w-[420px] h-[420px] bg-fuchsia-400/10 rounded-full blur-[130px] pointer-events-none translate-x-1/2"></div>
 
       <div
         className={`container mx-auto px-6 sm:px-12 lg:px-24 transition-all duration-1000 ease-out transform ${
@@ -55,13 +56,16 @@ const AboutSection = () => {
           <div className="col-span-1 lg:col-span-6 space-y-8">
             {/* Styled Header with Underline */}
             <div className="relative">
-                <h2 className="text-4xl md:text-5xl font-black uppercase tracking-widest text-white mb-2">
+                <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-[11px] uppercase tracking-[0.35em] text-cyan-100/80 mb-4 backdrop-blur-xl">
+                  About Core
+                </div>
+                <h2 className="text-4xl md:text-5xl font-black uppercase tracking-[0.28em] text-white mb-2 futuristic-title">
                 About Me
                 </h2>
-                <div className="h-1 w-24 bg-theme-accent-gray"></div>
+                <div className="h-px w-28 bg-gradient-to-r from-cyan-300 to-transparent"></div>
             </div>
 
-            <div className="text-theme-accent-gray leading-relaxed text-lg space-y-6 font-light">
+            <div className="text-theme-accent-gray leading-relaxed text-lg space-y-6 font-light max-w-2xl">
               <p>
                 Hi, I'm <span className="text-white font-bold">Xain Muhammad Khan</span>, a passionate developer with expertise in multiple domains. With a strong foundation in both front-end and back-end development, I create innovative solutions that make a difference.
               </p>
@@ -82,13 +86,13 @@ const AboutSection = () => {
                 <div 
                   key={card.id} 
                   className={`
-                    group relative p-8 bg-theme-gray/60 border border-white/5 rounded-2xl transition-all duration-300 hover:-translate-y-2 white-glow
+                    group relative p-8 cyber-panel rounded-2xl transition-all duration-300 hover:-translate-y-2 hover:border-cyan-300/30 hover:shadow-[0_0_60px_rgba(34,211,238,0.12)]
                     ${card.id === 3 ? 'md:col-span-2 md:w-2/3 md:mx-auto' : ''} 
                   `} 
                   /* Logic above: If it's the 3rd card, center it on larger screens to match image layout */
                 >
                   <div className="relative z-10 flex flex-col items-center text-center">
-                    <div className="text-4xl text-white mb-4 icon-glow">
+                    <div className="text-4xl text-cyan-200 mb-4 icon-glow">
                       {card.icon}
                     </div>
                     <h3 className="text-xl font-bold text-white mb-3 uppercase tracking-wider">

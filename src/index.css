@@ -6,6 +6,49 @@
 
 body {
   @apply bg-theme-black text-white font-sans overflow-x-hidden;
+  background-image:
+    radial-gradient(circle at top, rgba(34, 211, 238, 0.12), transparent 30%),
+    radial-gradient(circle at bottom right, rgba(255, 255, 255, 0.06), transparent 24%),
+    linear-gradient(180deg, #050505 0%, #070707 52%, #050505 100%);
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    linear-gradient(rgba(255, 255, 255, 0.03) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 255, 255, 0.03) 1px, transparent 1px);
+  background-size: 56px 56px;
+  mask-image: radial-gradient(circle at center, black 30%, transparent 85%);
+  opacity: 0.45;
+  z-index: 0;
+}
+
+body > #root {
+  position: relative;
+  z-index: 1;
+}
+
+@keyframes auroraShift {
+  0%, 100% { transform: translate3d(0, 0, 0) scale(1); }
+  50% { transform: translate3d(20px, -24px, 0) scale(1.05); }
+}
+
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-14px) rotate(2deg); }
+}
+
+@keyframes glowPulse {
+  0%, 100% { opacity: .5; filter: blur(28px); }
+  50% { opacity: .85; filter: blur(42px); }
+}
+
+@keyframes scanMove {
+  0% { transform: translateX(-120%); }
+  100% { transform: translateX(120%); }
 }
 
 /* Subtle white glow utilities used across the site */
@@ -61,4 +104,35 @@ body {
 .carousel-touch {
   touch-action: pan-x;
   -webkit-overflow-scrolling: touch;
+}
+
+.cyber-panel {
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.06), rgba(255, 255, 255, 0.02));
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  backdrop-filter: blur(18px);
+}
+
+.futuristic-title {
+  background: linear-gradient(90deg, #ffffff 0%, #c8feff 36%, #43d7ff 58%, #ffffff 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  color: transparent;
+}
+
+.neon-outline {
+  box-shadow: 0 0 0 1px rgba(34, 211, 238, 0.18), 0 0 40px rgba(34, 211, 238, 0.08);
+}
+
+.scanline {
+  position: relative;
+  overflow: hidden;
+}
+
+.scanline::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(110deg, transparent 0%, rgba(255, 255, 255, 0.16) 48%, transparent 58%);
+  transform: translateX(-120%);
+  animation: scanMove 6s ease-in-out infinite;
 }

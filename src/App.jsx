@@ -15,38 +15,8 @@ function App() {
       <HeroSection />
       <AboutSection />
       <SkillsSection />
-      {/* PortfolioSection showing your GitHub repos as thumbnails.
-          To use the attached images as thumbnails, place them in `public/projects/`
-          and name each file exactly as the repo slug with a .png (e.g. `Al-Furqan.png`).
-
-          Example mapping (filename -> repo slug):
-            Al-Furqan.png                     -> Al-Furqan
-            Fitjorn-Flutter.png               -> Fitjorn-Flutter
-            Quotify-Flutter.png               -> Quotify-Flutter
-            Quizzora-Flutter.png              -> Quizzora-Flutter
-            Grocery-app-project.png           -> Grocery-app-project
-            Flutter-covid-tracker-app.png     -> (your covid tracker repo slug)
-            Weather-app-flutter.png           -> (your weather repo slug)
-            periodic-table-html-css.png       -> (periodic table slug)
-
-          If a local image file is not found, the component will fall back to the GitHub social preview image.
-      */}
       <PortfolioSection github={{
         username: 'XainMuhammadKhan',
-        repos: [
-          'Al-Furqan',
-          'Waves',
-          'Tasq',
-          'Academix-LMS-An-AI-powered-LMS',
-          'Fitjorn-Flutter',
-          'Quotify-Flutter',
-          'Quizzora-Flutter',
-          'Grocery-app-project',
-          'periodic-table-html-css',
-          'flutter-covid-tracker-app',
-          'weather-app-flutter'
-        ],
-        // Local filename overrides (use the actual files you placed in public/projects/)
         localMap: {
           'Quotify-Flutter': 'quotelogo.png',
           'Fitjorn-Flutter': 'fitjorn.png',

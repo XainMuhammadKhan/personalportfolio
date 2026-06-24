@@ -66,7 +66,8 @@ const ContactSection = () => {
     <section id="contact" ref={ref} className="min-h-screen flex items-center bg-theme-black text-white py-20 relative overflow-hidden">
 
       {/* Background decorative glow (subtle theme tint) */}
-      <div className="absolute top-1/2 left-1/2 w-[600px] h-[600px] bg-white/5 rounded-full blur-[150px] pointer-events-none -translate-x-1/2 -translate-y-1/2"></div>
+      <div className="absolute top-1/2 left-1/2 w-[600px] h-[600px] bg-cyan-400/10 rounded-full blur-[150px] pointer-events-none -translate-x-1/2 -translate-y-1/2"></div>
+      <div className="absolute top-10 right-0 w-[420px] h-[420px] bg-fuchsia-400/10 rounded-full blur-[140px] pointer-events-none translate-x-1/2"></div>
 
       <div
         className={`container mx-auto px-6 sm:px-12 lg:px-24 transition-all duration-1000 ease-out transform ${
@@ -77,8 +78,11 @@ const ContactSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
           <div className="col-span-1 lg:col-span-6">
             <div className="relative">
-              <h2 className="text-4xl md:text-5xl font-black uppercase tracking-widest text-white mb-2">Contact Me</h2>
-              <div className="h-1 w-24 bg-theme-accent-gray"></div>
+              <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-[11px] uppercase tracking-[0.35em] text-cyan-100/80 mb-4 backdrop-blur-xl">
+                Contact Link
+              </div>
+              <h2 className="text-4xl md:text-5xl font-black uppercase tracking-[0.28em] text-white mb-2 futuristic-title">Contact Me</h2>
+              <div className="h-px w-28 bg-gradient-to-r from-cyan-300 to-transparent"></div>
             </div>
             <p className="text-theme-accent-gray mt-4">I&apos;m available for freelance work and new projects — reach out and let&apos;s build something great.</p>
           </div>
@@ -88,10 +92,10 @@ const ContactSection = () => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
           
           {/* LEFT COLUMN: Contact Information */}
-          <div className="flex flex-col gap-10 lg:pl-12">
+          <div className="flex flex-col gap-10 lg:pl-12 cyber-panel rounded-[2rem] p-8">
             {/* Email */}
             <div className="flex items-center gap-6">
-              <div className="text-4xl text-white icon-glow">
+              <div className="text-4xl text-cyan-200 icon-glow">
                 <MdEmail />
               </div>
               <span className="text-lg text-white font-medium">xain.k19@gmail.com</span>
@@ -99,7 +103,7 @@ const ContactSection = () => {
 
             {/* Phone */}
             <div className="flex items-center gap-6">
-              <div className="text-4xl text-white icon-glow">
+              <div className="text-4xl text-cyan-200 icon-glow">
                 <MdPhone />
               </div>
               <span className="text-lg text-white font-medium">+92 335 2909044</span>
@@ -107,7 +111,7 @@ const ContactSection = () => {
 
             {/* Location */}
             <div className="flex items-center gap-6">
-              <div className="text-4xl text-white icon-glow">
+              <div className="text-4xl text-cyan-200 icon-glow">
                 <MdLocationOn />
               </div>
               <span className="text-lg text-white font-medium">Karachi, Pakistan</span>
@@ -115,13 +119,13 @@ const ContactSection = () => {
           </div>
 
           {/* RIGHT COLUMN: Contact Form */}
-          <form className="space-y-6" onSubmit={handleSubmit}>
+          <form className="space-y-6 cyber-panel rounded-[2rem] p-8" onSubmit={handleSubmit}>
             <input 
               type="text" 
               placeholder="Your Name" 
               value={name}
               onChange={(e) => setName(e.target.value)}
-              className="w-full p-4 bg-theme-gray/60 border border-white/10 focus:border-white outline-none text-white placeholder-theme-accent-gray transition-colors duration-300 rounded-md white-glow" 
+              className="w-full p-4 bg-black/30 border border-white/10 focus:border-cyan-300/50 outline-none text-white placeholder-theme-accent-gray transition-colors duration-300 rounded-xl neon-outline" 
               aria-label="Your name"
             />
             <input 
@@ -129,7 +133,7 @@ const ContactSection = () => {
               placeholder="Your Email" 
               value={email}
               onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-4 bg-theme-gray/60 border border-white/10 focus:border-white outline-none text-white placeholder-theme-accent-gray transition-colors duration-300 rounded-md white-glow" 
+              className="w-full p-4 bg-black/30 border border-white/10 focus:border-cyan-300/50 outline-none text-white placeholder-theme-accent-gray transition-colors duration-300 rounded-xl neon-outline" 
               aria-label="Your email"
             />
             <textarea 
@@ -137,13 +141,13 @@ const ContactSection = () => {
               rows="6" 
               value={message}
               onChange={(e) => setMessage(e.target.value)}
-              className="w-full p-4 bg-theme-gray/60 border border-white/10 focus:border-white outline-none text-white placeholder-theme-accent-gray resize-y transition-colors duration-300 rounded-md white-glow" 
+              className="w-full p-4 bg-black/30 border border-white/10 focus:border-cyan-300/50 outline-none text-white placeholder-theme-accent-gray resize-y transition-colors duration-300 rounded-xl neon-outline" 
               aria-label="Your message"
             ></textarea>
             <button 
               type="submit" 
               disabled={loading}
-              className={`w-full py-4 bg-white text-theme-black font-bold text-xl uppercase tracking-wider rounded-lg hover:opacity-95 transition-all duration-300 white-glow hover:white-glow-strong focus:outline-none ${loading ? 'opacity-60 pointer-events-none' : ''}`}
+              className={`w-full py-4 bg-cyan-300 text-black font-bold text-xl uppercase tracking-[0.28em] rounded-xl hover:opacity-95 transition-all duration-300 shadow-[0_0_30px_rgba(34,211,238,0.35)] focus:outline-none ${loading ? 'opacity-60 pointer-events-none' : ''}`}
             >
               {loading ? 'Sending...' : 'Send Message'}
             </button>
