@@ -7,35 +7,43 @@ import ContactSection from './Components/Sections/ContactSection';
 import Footer from './Components/Layouts/Footer';
 import SectionIndicator from './Components/Layouts/SectionIndicator';
 import BackToTop from './Components/Layouts/BackToTop';
+import CursorGlow from './Components/Ui/CursorGlow';
 
 function App() {
   return (
-    <main>
-      <SectionIndicator />
-      <HeroSection />
-      <AboutSection />
-      <SkillsSection />
-      <PortfolioSection github={{
-        username: 'XainMuhammadKhan',
-        localMap: {
-          'Quotify-Flutter': 'quotelogo.png',
-          'Fitjorn-Flutter': 'fitjorn.png',
-          'Quizzora-Flutter': 'quizzora.png',
-          'Grocery-app-project': 'grocery.png',
-          'Al-Furqan': 'al furqan.png',
-          'Waves': 'waves.png',
-          'weather-app-flutter': 'weather.png',
-          'Academix-LMS-An-AI-powered-LMS': 'academix.png',
-          'My-Events': 'my events.png',
-          'flutter-covid-tracker-app': 'covid.png',
-          'periodic-table-html-css': 'periodic.png',
-          'Tasq': 'task.svg'
-        }
-      }} />
-      <ContactSection />
-      <Footer />
-      <BackToTop />
-    </main>
+    <>
+      {/* Global futuristic overlays */}
+      <div className="scanline-overlay" aria-hidden="true" />
+      <div className="crt-vignette" aria-hidden="true" />
+      <CursorGlow />
+
+      <main>
+        <SectionIndicator />
+        <HeroSection />
+        <AboutSection />
+        <SkillsSection />
+        <PortfolioSection github={{
+          username: 'XainMuhammadKhan',
+          localMap: {
+            'Quotify-Flutter': 'quotelogo.png',
+            'Fitjorn-Flutter': 'fitjorn.png',
+            'Quizzora-Flutter': 'quizzora.png',
+            'Grocery-app-project': 'grocery.png',
+            'Al-Furqan': 'al furqan.png',
+            'Waves': 'waves.png',
+            'weather-app-flutter': 'weather.png',
+            'Academix-LMS-An-AI-powered-LMS': 'academix.png',
+            'My-Events': 'my events.png',
+            'flutter-covid-tracker-app': 'covid.png',
+            'periodic-table-html-css': 'periodic.png',
+            'Tasq': 'task.svg'
+          }
+        }} />
+        <ContactSection />
+        <Footer />
+        <BackToTop />
+      </main>
+    </>
   );
 }
 
