@@ -27,7 +27,7 @@ const SectionIndicator = () => {
   }, []);
 
   return (
-    <div className="fixed left-3 lg:left-10 top-1/2 -translate-y-1/2 z-40 flex flex-col items-center gap-4 rounded-full border border-white/10 bg-black/40 px-3 py-4 backdrop-blur-xl">
+    <div className="hidden md:flex fixed left-3 lg:left-10 top-1/2 -translate-y-1/2 z-40 flex-col items-center gap-4 rounded-full border border-white/10 bg-black/40 px-3 py-4 backdrop-blur-xl">
       <div className="text-cyan-200 text-3xl font-black leading-none">{String(active + 1).padStart(2, '0')}</div>
       <div className="flex flex-col gap-3 mt-2 items-center">
         {sections.map((s, i) => (

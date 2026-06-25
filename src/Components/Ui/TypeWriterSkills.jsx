@@ -3,7 +3,7 @@ import { TypeAnimation } from 'react-type-animation';
 
 const TypewriterSkills = ({ center = false }) => {
   return (
-    <div className={`text-theme-accent-gray tracking-[0.2em] text-sm sm:text-lg mt-4 font-light uppercase ${center ? 'text-center' : 'text-left'}`}>
+    <div className={`text-theme-accent-gray tracking-[0.1em] sm:tracking-[0.2em] text-[10px] sm:text-sm md:text-lg mt-4 font-light uppercase ${center ? 'text-center' : 'text-left'}`}>
       <TypeAnimation
         sequence={[
           'Flutter Developer',

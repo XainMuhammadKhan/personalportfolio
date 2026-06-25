@@ -14,7 +14,7 @@ const HeroSection = () => {
     }, []);
 
     return (
-    <section className="relative h-screen w-full bg-theme-black overflow-visible flex items-center">
+    <section className="relative min-h-screen w-full bg-theme-black overflow-visible flex items-center pt-24 pb-12 md:py-0">
         <BackgroundElements />
         <Navbar />
 
@@ -34,37 +34,37 @@ const HeroSection = () => {
                 </div>
 
                  {/* Right Column: Text Content */}
-                                <div className="col-span-12 md:col-span-7 md:pl-16 pl-4 pt-14 md:pt-10 text-left flex flex-col items-start">
-                                                                                 <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-[11px] uppercase tracking-[0.4em] text-cyan-100/85 mb-6 backdrop-blur-xl neon-outline self-start">
+                                <div className="col-span-12 md:col-span-7 md:pl-16 pt-14 md:pt-10 flex flex-col items-center md:items-start text-center md:text-left w-full">
+                                                                                 <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-4 py-2 text-[11px] uppercase tracking-[0.4em] text-cyan-100/85 mb-6 backdrop-blur-xl neon-outline self-center md:self-start">
                                            <HiMiniSparkles className="text-sm" />
                                            Future-ready developer
                                          </div>
-                                         <h3 className="mb-4 tracking-wide text-center md:text-left">
+                                         <h3 className="mb-4 tracking-wide text-center md:text-left w-full flex justify-center md:justify-start">
                                                 <span className="text-lg sm:text-2xl md:text-4xl text-theme-accent-gray font-normal">Hi I am</span>
                                                 <span className="ml-3 text-white text-lg sm:text-2xl md:text-4xl font-extrabold">Xain</span>
                                          </h3>
-                                        <h1 className="text-3xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-[0.08em] leading-[0.92] text-center md:text-left futuristic-title max-w-[11ch]">
-                                                A CREATIVE<br/>SOFTWARE<br/>ENGINEER
+                                        <h1 className="text-4xl sm:text-4xl md:text-6xl lg:text-7xl font-black tracking-[0.08em] leading-[0.92] text-center md:text-left futuristic-title md:max-w-[11ch] break-words w-full">
+                                                A CREATIVE <br /> SOFTWARE <br /> ENGINEER
                                         </h1>
-                                        <p className="mt-6 max-w-xl text-sm sm:text-base text-white/70 leading-7">
+                                        <p className="mt-6 max-w-xl text-sm sm:text-base text-white/70 leading-7 text-center md:text-left mx-auto md:mx-0">
                                           I build sharp, interactive digital experiences with modern motion, strong contrast, and production-focused engineering.
                                         </p>
-                                        <div className="mt-8 w-full flex flex-col items-start gap-6">
-                                            <div className="w-full max-w-md rounded-2xl border border-white/10 bg-white/5 px-5 py-4 backdrop-blur-xl cyber-panel">
+                                        <div className="mt-8 w-full flex flex-col items-center md:items-start gap-6">
+                                            <div className="w-full max-w-md rounded-2xl border border-white/10 bg-white/5 px-4 md:px-5 py-4 backdrop-blur-xl cyber-panel overflow-hidden">
                                                 <TypewriterSkills />
                                             </div>
-                                            <div className="flex flex-wrap gap-4">
+                                            <div className="flex flex-col sm:flex-row flex-wrap gap-4 justify-center md:justify-start w-full">
                                               <a
                                                   href="/XAIN-KHAN-RESUME.pdf"
                                                   download="XAIN-KHAN-RESUME.pdf"
-                                                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-cyan-300 text-black font-bold uppercase tracking-[0.22em] shadow-[0_0_30px_rgba(34,211,238,0.35)] hover:scale-[1.02] transition-transform"
+                                                  className="inline-flex justify-center items-center gap-2 px-6 py-3 rounded-full bg-cyan-300 text-black font-bold uppercase tracking-[0.22em] shadow-[0_0_30px_rgba(34,211,238,0.35)] hover:scale-[1.02] transition-transform text-xs sm:text-sm"
                                               >
                                                   <HiMiniBolt className="text-lg" />
                                                   Download Resume
                                               </a>
                                               <a
                                                   href="#portfolio"
-                                                  className="inline-flex items-center gap-2 px-6 py-3 rounded-full border border-white/10 bg-white/5 text-white font-bold uppercase tracking-[0.22em] hover:border-cyan-300/40 hover:text-cyan-100 transition-colors backdrop-blur-xl"
+                                                  className="inline-flex justify-center items-center gap-2 px-6 py-3 rounded-full border border-white/10 bg-white/5 text-white font-bold uppercase tracking-[0.22em] hover:border-cyan-300/40 hover:text-cyan-100 transition-colors backdrop-blur-xl text-xs sm:text-sm"
                                               >
                                                   View Projects
                                               </a>
@@ -75,7 +75,7 @@ const HeroSection = () => {
         </div>
 
          {/* Right Side Scroll Indicator */}
-        <div className="absolute right-8 bottom-10 flex items-center gap-3 rotate-90 origin-right z-20 text-xs font-bold tracking-[0.35em] uppercase text-white/65">
+        <div className="hidden md:flex absolute right-8 bottom-10 items-center gap-3 rotate-90 origin-right z-20 text-xs font-bold tracking-[0.35em] uppercase text-white/65">
             <span>Scroll Down</span>
             <HiArrowLongDown className="text-lg rotate-[-90deg] text-cyan-200" />
         </div>
