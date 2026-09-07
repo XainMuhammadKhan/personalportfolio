@@ -7,12 +7,13 @@ export default {
   theme: {
     extend: {
       fontFamily: {
-        sans: ['Montserrat', 'sans-serif'], // Ensure you import this in index.css
+        sans: ['DM Sans', 'sans-serif'],
       },
       colors: {
         'theme-black': '#050505',
-        'theme-gray': '#1A1A1A',
-        'theme-accent-gray': '#888888',
+        'theme-gray': '#0d0d0f',
+        'theme-accent-gray': '#9c9295',
+        'theme-red': '#ff1f3d',
       },
       letterSpacing: {
         widest: '.25em',

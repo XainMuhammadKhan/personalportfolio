@@ -1,31 +1,24 @@
 import React, { useEffect, useState } from 'react';
-import { HiChevronUp } from 'react-icons/hi';
+import { HiArrowUp } from 'react-icons/hi';
 
 const BackToTop = () => {
   const [visible, setVisible] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => {
-      setVisible(window.scrollY > 300);
-    };
-    onScroll();
+    const onScroll = () => setVisible(window.scrollY > 700);
     window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
     return () => window.removeEventListener('scroll', onScroll);
   }, []);
 
-  const handleClick = () => {
-    window.scrollTo({ top: 0, behavior: 'smooth' });
-  };
-
-  if (!visible) return null;
-
   return (
     <button
+      className={`back-to-top ${visible ? 'is-visible' : ''}`}
+      type="button"
       aria-label="Back to top"
-      onClick={handleClick}
-      className="fixed right-6 bottom-6 z-60 w-12 h-12 rounded-full flex items-center justify-center bg-cyan-300 text-black shadow-[0_0_30px_rgba(34,211,238,0.35)] hover:scale-105 transition-transform duration-200 focus:outline-none"
+      onClick={() => window.scrollTo({ top: 0, behavior: 'smooth' })}
     >
-      <HiChevronUp className="w-6 h-6 text-black" />
+      <HiArrowUp />
     </button>
   );
 };

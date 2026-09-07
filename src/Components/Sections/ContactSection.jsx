@@ -1,164 +1,78 @@
-import React, { useRef, useEffect, useState } from 'react';
-import { MdEmail, MdPhone, MdLocationOn } from "react-icons/md"; 
+import React, { useState } from 'react';
+import { FaGithub, FaLinkedinIn } from 'react-icons/fa';
+import { HiMail, HiOutlineLocationMarker, HiOutlinePhone, HiOutlineSparkles } from 'react-icons/hi';
+import { HiArrowUpRight } from 'react-icons/hi2';
 
 const ContactSection = () => {
-  const ref = useRef(null);
-  const [visible, setVisible] = useState(false);
+  const [form, setForm] = useState({ name: '', email: '', subject: '', message: '' });
 
-  useEffect(() => {
-    const node = ref.current;
-    if (!node) return;
-    const obs = new IntersectionObserver(
-      ([entry]) => setVisible(entry.isIntersecting),
-      { threshold: 0.15 }
-    );
-    obs.observe(node);
-    return () => obs.disconnect();
-  }, []);
+  const updateField = (event) => {
+    setForm((current) => ({ ...current, [event.target.name]: event.target.value }));
+  };
 
-  const [name, setName] = useState('');
-  const [email, setEmail] = useState('');
-  const [message, setMessage] = useState('');
-  const [loading, setLoading] = useState(false);
-  const [status, setStatus] = useState(null);
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setStatus(null);
-    if (!name.trim() || !email.trim() || !message.trim()) {
-      setStatus({ type: 'error', message: 'Please fill in all fields.' });
-      return;
-    }
-    setLoading(true);
-    try {
-      // During local development the backend Express server listens on port 3000
-      // (run with `npm run start-server`). In production (Vercel), the serverless
-      // function will be available at `/api/contact`. Use localhost fallback when
-      // testing locally.
-      const endpoint = window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1'
-        ? 'http://localhost:3000/api/contact'
-        : '/api/contact';
-
-      const res = await fetch(endpoint, {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body: JSON.stringify({ name, email, message })
-      });
-
-      const data = await res.json();
-      if (res.ok && data.ok) {
-        setStatus({ type: 'success', message: 'Message sent — thank you! I will reply soon.' });
-        setName('');
-        setEmail('');
-        setMessage('');
-      } else {
-        setStatus({ type: 'error', message: data.error || 'Failed to send message.' });
-      }
-    } catch (err) {
-      setStatus({ type: 'error', message: 'Network error — please try again later.' });
-    }
-    setLoading(false);
+  const openGmail = (event) => {
+    event.preventDefault();
+    const subject = form.subject || `Project enquiry from ${form.name}`;
+    const body = `${form.message}\n\nFrom: ${form.name}\nEmail: ${form.email}`;
+    const url = `https://mail.google.com/mail/?view=cm&fs=1&to=xain.k19%40gmail.com&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
+    window.open(url, '_blank', 'noopener,noreferrer');
   };
 
   return (
-    <section id="contact" ref={ref} className="min-h-screen flex items-center bg-theme-black text-white py-20 relative overflow-hidden">
-
-      {/* Background decorative glow (subtle theme tint) */}
-      <div className="absolute top-1/2 left-1/2 w-[600px] h-[600px] bg-cyan-400/10 rounded-full blur-[150px] pointer-events-none -translate-x-1/2 -translate-y-1/2"></div>
-      <div className="absolute top-10 right-0 w-[420px] h-[420px] bg-fuchsia-400/10 rounded-full blur-[140px] pointer-events-none translate-x-1/2"></div>
-
-      <div
-        className={`container mx-auto px-6 sm:px-12 lg:px-24 transition-all duration-1000 ease-out transform ${
-          visible ? 'opacity-100 translate-y-0' : 'opacity-0 translate-y-12'
-        }`}
-      >
-        {/* Section Header aligned with About */}
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 mb-8">
-          <div className="col-span-1 lg:col-span-6">
-            <div className="relative">
-              <div className="inline-flex items-center gap-2 rounded-full border border-cyan-300/20 bg-cyan-300/10 px-3 py-1 text-[11px] uppercase tracking-[0.35em] text-cyan-100/80 mb-4 backdrop-blur-xl">
-                Contact Link
-              </div>
-              <h2 className="text-4xl md:text-5xl font-black uppercase tracking-[0.28em] text-white mb-2 futuristic-title">Contact Me</h2>
-              <div className="h-px w-28 bg-gradient-to-r from-cyan-300 to-transparent"></div>
-            </div>
-            <p className="text-theme-accent-gray mt-4">I&apos;m available for freelance work and new projects — reach out and let&apos;s build something great.</p>
-          </div>
+    <section id="contact" className="section-wrap contact-section">
+      <div className="content-width">
+        <div className="contact-intro">
+          <span className="eyebrow"><HiOutlineSparkles /> 06 / Contact</span>
+          <h2>Have an idea?<br /><em>Let&apos;s make it real.</em></h2>
+          <p>Tell me what you&apos;re building, where it needs to go and what success looks like. I&apos;ll meet you there.</p>
         </div>
 
-        {/* Contact Content Grid */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 items-start">
-          
-          {/* LEFT COLUMN: Contact Information */}
-          <div className="flex flex-col gap-10 lg:pl-12 cyber-panel rounded-[2rem] p-8">
-            {/* Email */}
-            <div className="flex items-center gap-6">
-              <div className="text-4xl text-cyan-200 icon-glow">
-                <MdEmail />
-              </div>
-              <span className="text-lg text-white font-medium">xain.k19@gmail.com</span>
+        <div className="contact-grid">
+          <aside className="contact-details">
+            <a className="neo-panel contact-item" href="mailto:xain.k19@gmail.com">
+              <div className="icon-well"><HiMail /></div>
+              <div><span>Email</span><strong>xain.k19@gmail.com</strong></div>
+              <HiArrowUpRight className="contact-arrow" />
+            </a>
+            <a className="neo-panel contact-item" href="tel:+923352909044">
+              <div className="icon-well"><HiOutlinePhone /></div>
+              <div><span>Phone</span><strong>+92 335 2909044</strong></div>
+              <HiArrowUpRight className="contact-arrow" />
+            </a>
+            <div className="neo-panel contact-item">
+              <div className="icon-well"><HiOutlineLocationMarker /></div>
+              <div><span>Location</span><strong>Karachi, Pakistan</strong></div>
             </div>
-
-            {/* Phone */}
-            <div className="flex items-center gap-6">
-              <div className="text-4xl text-cyan-200 icon-glow">
-                <MdPhone />
-              </div>
-              <span className="text-lg text-white font-medium">+92 335 2909044</span>
+            <div className="social-wells">
+              <a href="https://github.com/XainMuhammadKhan" target="_blank" rel="noreferrer" aria-label="GitHub"><FaGithub /></a>
+              <a href="https://www.linkedin.com/in/xain-muhammad-khan-8a746b319/" target="_blank" rel="noreferrer" aria-label="LinkedIn"><FaLinkedinIn /></a>
             </div>
+          </aside>
 
-            {/* Location */}
-            <div className="flex items-center gap-6">
-              <div className="text-4xl text-cyan-200 icon-glow">
-                <MdLocationOn />
-              </div>
-              <span className="text-lg text-white font-medium">Karachi, Pakistan</span>
+          <form className="neo-panel contact-form" onSubmit={openGmail}>
+            <div className="form-row">
+              <label>
+                <span>Your name</span>
+                <input name="name" value={form.name} onChange={updateField} placeholder="John Doe" required />
+              </label>
+              <label>
+                <span>Your email</span>
+                <input name="email" type="email" value={form.email} onChange={updateField} placeholder="john@company.com" required />
+              </label>
             </div>
-          </div>
-
-          {/* RIGHT COLUMN: Contact Form */}
-          <form className="space-y-6 cyber-panel rounded-[2rem] p-8" onSubmit={handleSubmit}>
-            <input 
-              type="text" 
-              placeholder="Your Name" 
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-              className="w-full p-4 bg-black/30 border border-white/10 focus:border-cyan-300/50 outline-none text-white placeholder-theme-accent-gray transition-colors duration-300 rounded-xl neon-outline" 
-              aria-label="Your name"
-            />
-            <input 
-              type="email" 
-              placeholder="Your Email" 
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              className="w-full p-4 bg-black/30 border border-white/10 focus:border-cyan-300/50 outline-none text-white placeholder-theme-accent-gray transition-colors duration-300 rounded-xl neon-outline" 
-              aria-label="Your email"
-            />
-            <textarea 
-              placeholder="Your Message" 
-              rows="6" 
-              value={message}
-              onChange={(e) => setMessage(e.target.value)}
-              className="w-full p-4 bg-black/30 border border-white/10 focus:border-cyan-300/50 outline-none text-white placeholder-theme-accent-gray resize-y transition-colors duration-300 rounded-xl neon-outline" 
-              aria-label="Your message"
-            ></textarea>
-            <button 
-              type="submit" 
-              disabled={loading}
-              className={`w-full py-4 bg-cyan-300 text-black font-bold text-xl uppercase tracking-[0.28em] rounded-xl hover:opacity-95 transition-all duration-300 shadow-[0_0_30px_rgba(34,211,238,0.35)] focus:outline-none ${loading ? 'opacity-60 pointer-events-none' : ''}`}
-            >
-              {loading ? 'Sending...' : 'Send Message'}
+            <label>
+              <span>Subject</span>
+              <input name="subject" value={form.subject} onChange={updateField} placeholder="A new digital product" />
+            </label>
+            <label>
+              <span>Tell me about it</span>
+              <textarea name="message" value={form.message} onChange={updateField} rows="6" placeholder="Project goals, scope and timeline..." required />
+            </label>
+            <button className="neo-button form-submit" type="submit">
+              Continue in Gmail <HiArrowUpRight />
             </button>
-
-            {status && (
-              <div className={`text-sm mt-2 ${status.type === 'success' ? 'text-green-400' : 'text-rose-400'}`} role="status">
-                {status.message}
-              </div>
-            )}
+            <p className="form-note">Opens a pre-filled Gmail compose window addressed to me.</p>
           </form>
-
         </div>
       </div>
     </section>

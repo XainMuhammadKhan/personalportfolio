@@ -1,152 +1,82 @@
-import React, { useState, useRef, useEffect } from 'react';
-import { HiMenu, HiX } from 'react-icons/hi';
+import React, { useEffect, useState } from 'react';
+import { HiMenuAlt3, HiX } from 'react-icons/hi';
+import { HiArrowUpRight } from 'react-icons/hi2';
 
-// Array of navigation links
 const navLinks = [
-    { name: 'About', href: '#about' },
-    { name: 'Skills', href: '#skills' },
-    { name: 'Portfolio', href: '#portfolio' },
-    { name: 'Contact', href: '#contact' },
+  { name: 'About', href: '#about' },
+  { name: 'Skills', href: '#skills' },
+  { name: 'Experience', href: '#experience' },
+  { name: 'Projects', href: '#projects' },
+  { name: 'Credentials', href: '#certifications' },
+  { name: 'Contact', href: '#contact' },
 ];
 
+const gmailUrl = 'https://mail.google.com/mail/?view=cm&fs=1&to=xain.k19%40gmail.com&su=Project%20Enquiry';
+
 const Navbar = () => {
-    const [isMenuOpen, setIsMenuOpen] = useState(false);
-    const [isOverlayMounted, setIsOverlayMounted] = useState(false);
-    const closeTimeoutRef = useRef(null);
-    const toggleButtonRef = useRef(null);
-    const closeButtonRef = useRef(null);
+  const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
 
-    // --- Menu Logic ---
-    const openMenu = () => {
-        if (closeTimeoutRef.current) {
-            clearTimeout(closeTimeoutRef.current);
-            closeTimeoutRef.current = null;
-        }
-        setIsOverlayMounted(true);
-        requestAnimationFrame(() => setIsMenuOpen(true));
-    };
+  useEffect(() => {
+    const onScroll = () => setScrolled(window.scrollY > 28);
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
+    return () => window.removeEventListener('scroll', onScroll);
+  }, []);
 
-    const closeMenu = (e) => {
-        // Prevent default action for anchor tags if triggered by an event
-        if (e && e.preventDefault) {
-            e.preventDefault();
-            // Manually trigger navigation after closing the menu
-            // This prevents the anchor hash from immediately jumping before the menu closes
-            if (e.currentTarget.href) {
-                const targetId = e.currentTarget.href.split('#')[1];
-                setTimeout(() => {
-                    document.getElementById(targetId)?.scrollIntoView({ behavior: 'smooth' });
-                }, 320); // Wait for the menu transition (300ms) + a buffer
-            }
-        }
+  useEffect(() => {
+    document.body.style.overflow = open ? 'hidden' : '';
+    return () => { document.body.style.overflow = ''; };
+  }, [open]);
 
-        setIsMenuOpen(false);
-        closeTimeoutRef.current = setTimeout(() => {
-            setIsOverlayMounted(false);
-            try { toggleButtonRef.current?.focus(); } catch (e) {}
-            closeTimeoutRef.current = null;
-        }, 320);
-    };
+  return (
+    <header className={`site-header ${scrolled ? 'is-scrolled' : ''}`}>
+      <nav className="nav-shell" aria-label="Main navigation">
+        <a href="#hero" className="brand-mark" aria-label="Xain Khan home">
+          <span className="brand-bracket">&lt;</span>
+          <span>XK</span>
+          <span className="brand-bracket">/&gt;</span>
+        </a>
 
-    const toggleMenu = () => {
-        if (isMenuOpen) closeMenu();
-        else openMenu();
-    };
+        <div className="desktop-nav">
+          <ul className="nav-links">
+            {navLinks.map((link) => (
+              <li key={link.name}>
+                <a href={link.href}>{link.name}</a>
+              </li>
+            ))}
+          </ul>
+          <a className="neo-button neo-button-small" href={gmailUrl} target="_blank" rel="noreferrer">
+            Hire me <HiArrowUpRight />
+          </a>
+        </div>
 
-    // --- Side Effects ---
-    useEffect(() => {
-        if (isMenuOpen) {
-            try { closeButtonRef.current?.focus(); } catch (e) {}
-            const onKey = (e) => {
-                if (e.key === 'Escape') closeMenu();
-            };
-            document.addEventListener('keydown', onKey);
-            return () => document.removeEventListener('keydown', onKey);
-        }
-    }, [isMenuOpen]);
+        <button
+          className="menu-button"
+          type="button"
+          aria-label={open ? 'Close menu' : 'Open menu'}
+          aria-expanded={open}
+          onClick={() => setOpen((value) => !value)}
+        >
+          {open ? <HiX /> : <HiMenuAlt3 />}
+        </button>
 
-    useEffect(() => {
-        return () => {
-            if (closeTimeoutRef.current) clearTimeout(closeTimeoutRef.current);
-        };
-    }, []);
-
-    // --- Link Component for Reuse ---
-    const NavLink = ({ name, href, isMobile = false }) => (
-        // Added 'group' class to the <li>/<a> wrapper to enable underline on hover
-        <li className="group transition-transform duration-200" key={name}>
-            <a 
-                href={href} 
-                onClick={isMobile ? closeMenu : null} // Use closeMenu for mobile links
-                className={`relative transition-all duration-300 transform hover:scale-[1.05] hover:text-cyan-200 ${isMobile ? 'py-2 px-4 text-2xl' : 'py-1'}`}
-            >
-                {name}
-                {/* Underline Element */}
-                <span className="absolute bottom-0 left-0 w-full h-[2px] bg-gradient-to-r from-cyan-300 to-white transform scale-x-0 transition-transform duration-300 group-hover:scale-x-100 group-focus:scale-x-100"></span>
-            </a>
-        </li>
-    );
-
-    return (
-        <nav className="absolute top-0 left-0 right-0 py-4 px-4 sm:py-8 sm:px-12 flex justify-between items-center z-50 uppercase tracking-[0.28em] text-xs sm:text-sm font-semibold text-white">
-            
-            {/* Logo Placeholder */}
-            <div className="flex items-center gap-3 rounded-full border border-cyan-300/20 bg-white/8 px-3 py-2 backdrop-blur-2xl shadow-[0_12px_40px_rgba(0,0,0,0.35)] neon-outline">
-                <div className="w-7 h-7 border border-cyan-300/60 rotate-45 flex items-center justify-center rounded-sm bg-cyan-300/10 shadow-[0_0_25px_rgba(34,211,238,0.24)]">
-                    <div className="w-3 h-3 bg-cyan-200"></div>
-                </div>
-                <span className="hidden sm:inline text-white/90">Xain's Portfolio</span>
-            </div>
-
-            {/* Navigation Links (desktop) */}
-            <ul className="hidden sm:flex gap-6 text-xs rounded-full border border-cyan-300/15 bg-white/5 px-5 py-3 backdrop-blur-2xl shadow-[0_12px_40px_rgba(0,0,0,0.28)]">
-                {navLinks.map((link) => (
-                    <NavLink key={link.name} {...link} />
-                ))}
-            </ul>
-
-            {/* Mobile Hamburger */}
-            <div className="sm:hidden">
-                <button
-                    ref={toggleButtonRef}
-                    onClick={toggleMenu}
-                    aria-expanded={isMenuOpen}
-                    aria-label="Toggle menu"
-                    className="relative z-60 text-white text-3xl transition-transform duration-300 hover:scale-110 hover:text-cyan-200 focus:outline-none"
-                >
-                    <div className={`transform transition-transform duration-300 ${isMenuOpen ? 'rotate-90 scale-95' : 'rotate-0'}`}>
-                        {isMenuOpen ? <HiX /> : <HiMenu />}
-                    </div>
-                </button>
-            </div>
-
-            {/* Mobile Menu Overlay */}
-            {isOverlayMounted && (
-                <div
-                    aria-hidden={!isOverlayMounted}
-                    // Ensure transition classes are correctly defined for slide-in/slide-out
-                    className={`fixed inset-0 bg-[radial-gradient(circle_at_top,_rgba(34,211,238,0.14),_transparent_30%),rgba(0,0,0,0.88)] backdrop-blur-2xl z-40 transform transition-transform duration-300 ease-in-out ${isMenuOpen ? 'translate-x-0 opacity-100' : 'translate-x-full opacity-0'}`}
-                >
-                    {/* Close button inside overlay (top-right) */}
-                    <button
-                        ref={closeButtonRef}
-                        onClick={closeMenu}
-                        aria-label="Close menu"
-                        tabIndex={isMenuOpen ? 0 : -1}
-                        className="absolute top-5 right-5 text-white text-3xl z-50 p-2 transition-transform duration-200 hover:scale-110 hover:text-cyan-200 focus:outline-none"
-                    >
-                        <HiX />
-                    </button>
-
-                    <ul className="h-full flex flex-col items-center justify-center gap-8 text-2xl">
-                        {navLinks.map((link) => (
-                            <NavLink key={link.name} {...link} isMobile={true} />
-                        ))}
-                    </ul>
-                </div>
-            )}
-        </nav>
-    );
+        <div className={`mobile-menu ${open ? 'is-open' : ''}`} aria-hidden={!open}>
+          <ul>
+            {navLinks.map((link, index) => (
+              <li key={link.name}>
+                <span>0{index + 1}</span>
+                <a href={link.href} onClick={() => setOpen(false)}>{link.name}</a>
+              </li>
+            ))}
+          </ul>
+          <a className="neo-button" href={gmailUrl} target="_blank" rel="noreferrer" onClick={() => setOpen(false)}>
+            Hire me <HiArrowUpRight />
+          </a>
+        </div>
+      </nav>
+    </header>
+  );
 };
 
 export default Navbar;

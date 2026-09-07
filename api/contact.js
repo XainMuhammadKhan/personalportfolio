@@ -44,7 +44,7 @@ export default async function handler(req, res) {
 
     // Verify connection configuration in dev logs (silent in prod)
     if (process.env.NODE_ENV !== 'production') {
-      try { await transporter.verify(); } catch (_) { /* ignore verify errors */ }
+      try { await transporter.verify(); } catch { /* ignore verify errors */ }
     }
 
     const info = await transporter.sendMail({
@@ -61,6 +61,3 @@ export default async function handler(req, res) {
     return res.status(500).json({ ok: false, error: err.message });
   }
 }
-
-
-//fuck you bitch

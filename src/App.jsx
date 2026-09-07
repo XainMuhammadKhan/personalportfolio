@@ -1,8 +1,11 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import Navbar from './Components/Layouts/Navbar';
 import HeroSection from './Components/Sections/HeroSection';
 import AboutSection from './Components/Sections/AboutSection';
-import PortfolioSection from './Components/Sections/PortfolioSection';
 import SkillsSection from './Components/Sections/SkillsSection';
+import ExperienceSection from './Components/Sections/ExperienceSection';
+import PortfolioSection from './Components/Sections/PortfolioSection';
+import CertificationsSection from './Components/Sections/CertificationsSection';
 import ContactSection from './Components/Sections/ContactSection';
 import Footer from './Components/Layouts/Footer';
 import SectionIndicator from './Components/Layouts/SectionIndicator';
@@ -10,40 +13,36 @@ import BackToTop from './Components/Layouts/BackToTop';
 import CursorGlow from './Components/Ui/CursorGlow';
 
 function App() {
+  useEffect(() => {
+    if (!window.location.hash) return undefined;
+    const timer = window.setTimeout(() => {
+      document.querySelector(window.location.hash)?.scrollIntoView();
+    }, 100);
+    return () => window.clearTimeout(timer);
+  }, []);
+
   return (
-    <>
-      {/* Global futuristic overlays */}
-      <div className="scanline-overlay" aria-hidden="true" />
-      <div className="crt-vignette" aria-hidden="true" />
+    <div className="app-shell">
+      <div className="ambient ambient-one" aria-hidden="true" />
+      <div className="ambient ambient-two" aria-hidden="true" />
+      <div className="noise-layer" aria-hidden="true" />
       <CursorGlow />
+      <Navbar />
+      <SectionIndicator />
 
       <main>
-        <SectionIndicator />
         <HeroSection />
         <AboutSection />
         <SkillsSection />
-        <PortfolioSection github={{
-          username: 'XainMuhammadKhan',
-          localMap: {
-            'Quotify-Flutter': 'quotelogo.png',
-            'Fitjorn-Flutter': 'fitjorn.png',
-            'Quizzora-Flutter': 'quizzora.png',
-            'Grocery-app-project': 'grocery.png',
-            'Al-Furqan': 'al furqan.png',
-            'Waves': 'waves.png',
-            'weather-app-flutter': 'weather.png',
-            'Academix-LMS-An-AI-powered-LMS': 'academix.png',
-            'My-Events': 'my events.png',
-            'flutter-covid-tracker-app': 'covid.png',
-            'periodic-table-html-css': 'periodic.png',
-            'Tasq': 'task.svg'
-          }
-        }} />
+        <ExperienceSection />
+        <PortfolioSection />
+        <CertificationsSection />
         <ContactSection />
-        <Footer />
-        <BackToTop />
       </main>
-    </>
+
+      <Footer />
+      <BackToTop />
+    </div>
   );
 }
 
