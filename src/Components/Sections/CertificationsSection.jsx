@@ -24,7 +24,7 @@ const CertificationsSection = () => (
             <h3>Bachelor&apos;s of Science in Software Engineering</h3>
             <p>Department of Computer Science (UBIT), University of Karachi</p>
           </div>
-          <span className="credential-seal">CS</span>
+          <span className="credential-seal">SE</span>
         </article>
 
         <div className="credentials-grid">
